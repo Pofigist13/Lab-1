@@ -18,7 +18,8 @@ namespace КалендарьКласс
             Date = date;
             Description = description;
         }
-    }
+    }
+
     public class CalendarManager
     {
         public List<Event> Events { get; private set; }
@@ -69,5 +70,6 @@ namespace КалендарьКласс
                 }
             }
         }
-    }
+    }
+
 }
