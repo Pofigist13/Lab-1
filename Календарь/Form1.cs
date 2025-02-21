@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.IO;
-using System.Data;
-using System.Linq;
 using КалендарьКласс;
 
 namespace Календарь
@@ -64,7 +60,7 @@ namespace Календарь
             eventsListBox.Items.Clear();
             foreach (var e in calendarManager.Events)
             {
-                eventsListBox.Items.Add($"{e.Date.ToString("yyyy-MM-dd")} - {e.Description}");
+                eventsListBox.Items.Add($"{e.Date.ToString("yyyy/MM/dd")} - {e.Description}");
             }
         }
         private void AddEventButton_Click(object sender, EventArgs e)
@@ -95,10 +91,9 @@ namespace Календарь
             }
             string selectedItem = eventsListBox.SelectedItem.ToString();
             DateTime date;
-            if (DateTime.TryParse(selectedItem.Split(new[] { '-' }, StringSplitOptions.None)[0], out
-            date))
+            if (DateTime.TryParse(selectedItem.Split(new char[]{ '-' }, StringSplitOptions.None)[0], out date))
             {
-                var eventToRemove = calendarManager.Events.Find(e => e.Date == date);
+                var eventToRemove = calendarManager.Events.Find(x => x.Date == date);
                 if (eventToRemove != null)
                 {
                     try
