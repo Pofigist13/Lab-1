@@ -7,7 +7,11 @@ namespace КалендарьКласс
 {
     public class Event
     {
-        public DateTime Date { get; set; }
+        private DateTime date;
+        public DateTime Date { get { return date; } set
+            {
+                date = DateTime.Parse(value.ToString("dd/MM/yyyy"));
+            } }
         public string Description { get; set; }
         public Event(DateTime date, string description)
         {
