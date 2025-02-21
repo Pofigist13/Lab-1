@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.IO;
-using System.Data;
-using System.Linq;
 using System.Drawing;
 
 namespace Календарь
@@ -27,16 +23,7 @@ namespace Календарь
         /// Освободить все используемые ресурсы.
         /// </summary>
         /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
-        #region Код, автоматически созданный конструктором форм Windows
 
         /// <summary>
         /// Требуемый метод для поддержки конструктора — не изменяйте 
@@ -73,7 +60,7 @@ namespace Календарь
             throw new NotImplementedException();
         }
 
-        #endregion
+  
     }
 }
 
