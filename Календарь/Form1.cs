@@ -4,69 +4,114 @@ using System.Collections.Generic;
 using System.IO;
 using System.Data;
 using System.Linq;
+using КалендарьКласс;
 
 namespace Календарь
 {
-    public class Event
+    public class CalendarForm : Form
     {
-        public DateTime Date { get; set; }
-        public string Description { get; set; }
-        public Event(DateTime date, string description)
+        private CalendarManager calendarManager;
+        private DateTimePicker datePicker;
+        private TextBox descriptionTextBox;
+        private Button addEventButton;
+        private ListBox eventsListBox;
+        private Button removeEventButton;
+        public CalendarForm()
         {
-            Date = date;
-            Description = description;
-        }
-    }
-    public class CalendarManager
-    {
-        public List<Event> Events { get; private set; }
-        public CalendarManager()
-        {
-            Events = new List<Event>();
-            LoadEvents();
-        }
-        public void AddEvent(Event e)
-        {
-            if (e == null)
+            this.Text = "Календарь событий";
+            this.Width = 400;
+            this.Height = 400;
+            datePicker = new DateTimePicker
             {
-                throw new ArgumentNullException(nameof(e));
+                Location = new System.Drawing.Point(10, 10)
+            };
+            descriptionTextBox = new TextBox
+            {
+                Location = new System.Drawing.Point(10, 40),
+                Width = 200
+            };
+            addEventButton = new Button
+            {
+                Location = new System.Drawing.Point(10, 70),
+                Text = "Добавить",
+                Width = 100
+            };
+            addEventButton.Click += AddEventButton_Click;
+            eventsListBox = new ListBox
+            {
+                Location = new System.Drawing.Point(10, 100),
+                Width = 200,
+                Height = 200
+            };
+            removeEventButton = new Button
+            {
+                Location = new System.Drawing.Point(220, 100),
+                Text = "Удалить",
+                Width = 80,
+                Height = 20
+            };
+            removeEventButton.Click += RemoveEventButton_Click;
+            this.Controls.Add(datePicker);
+            this.Controls.Add(descriptionTextBox);
+            this.Controls.Add(addEventButton);
+            this.Controls.Add(eventsListBox);
+            this.Controls.Add(removeEventButton);
+            calendarManager = new CalendarManager();
+            UpdateEventsList();
+        }
+        private void UpdateEventsList()
+        {
+            eventsListBox.Items.Clear();
+            foreach (var e in calendarManager.Events)
+            {
+                eventsListBox.Items.Add($"{e.Date.ToString("yyyy-MM-dd")} - {e.Description}");
             }
-            Events.Add(e);
-            SaveEvents();
         }
-        public void RemoveEvent(Event e)
+        private void AddEventButton_Click(object sender, EventArgs e)
         {
-            if (e == null)
+            if (string.IsNullOrEmpty(descriptionTextBox.Text))
             {
-                throw new ArgumentNullException(nameof(e));
+                MessageBox.Show("Введите описание события!");
+                return;
             }
-            Events.Remove(e);
-            SaveEvents();
-        }
-        public void SaveEvents()
-        {
-            File.WriteAllLines("events.txt", Events.Select(e =>
-            $"{e.Date.ToString("yyyy-MM-dd")}|{e.Description}"));
-        }
-        public void LoadEvents()
-        {
-            if (File.Exists("events.txt"))
+            Event newEvent = new Event(datePicker.Value, descriptionTextBox.Text);
+            try
             {
-                var lines = File.ReadAllLines("events.txt");
-                foreach (var line in lines)
+                calendarManager.AddEvent(newEvent);
+                descriptionTextBox.Clear();
+                UpdateEventsList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void RemoveEventButton_Click(object sender, EventArgs e)
+        {
+            if (eventsListBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Выберите событие для удаления!");
+                return;
+            }
+            string selectedItem = eventsListBox.SelectedItem.ToString();
+            DateTime date;
+            if (DateTime.TryParse(selectedItem.Split(new[] { '-' }, StringSplitOptions.None)[0], out
+            date))
+            {
+                var eventToRemove = calendarManager.Events.Find(e => e.Date == date);
+                if (eventToRemove != null)
                 {
-                    var parts = line.Split('|');
-                    if (parts.Length == 2)
+                    try
                     {
-                        DateTime date;
-                        if (DateTime.TryParse(parts[0], out date))
-                        {
-                            Events.Add(new Event(date, parts[1]));
-                        }
+                        calendarManager.RemoveEvent(eventToRemove);
+                        UpdateEventsList();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                 }
             }
         }
     }
-    
 }
