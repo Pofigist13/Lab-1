@@ -108,5 +108,18 @@ namespace Календарь
                 }
             }
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // CalendarForm
+            // 
+            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "CalendarForm";
+            this.ResumeLayout(false);
+
+        }
     }
 }
