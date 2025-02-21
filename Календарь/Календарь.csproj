@@ -77,5 +77,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\КалендарьКласс\КалендарьКласс.csproj">
+      <Project>{3ed9b21a-def6-4ec8-a879-9eaac312ea05}</Project>
+      <Name>КалендарьКласс</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
