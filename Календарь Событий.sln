@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Календарь", "Ка�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "КалендарьКласс", "КалендарьКласс\КалендарьКласс.csproj", "{3ED9B21A-DEF6-4EC8-A879-9EAAC312EA05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar.Tests", "Calendar.Tests\Calendar.Tests.csproj", "{151CC82C-B28A-47DD-90DD-401F529C5A83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3ED9B21A-DEF6-4EC8-A879-9EAAC312EA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ED9B21A-DEF6-4EC8-A879-9EAAC312EA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ED9B21A-DEF6-4EC8-A879-9EAAC312EA05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{151CC82C-B28A-47DD-90DD-401F529C5A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{151CC82C-B28A-47DD-90DD-401F529C5A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{151CC82C-B28A-47DD-90DD-401F529C5A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{151CC82C-B28A-47DD-90DD-401F529C5A83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
