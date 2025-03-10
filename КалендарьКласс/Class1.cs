@@ -18,7 +18,8 @@ namespace КалендарьКласс
             Date = date;
             Description = description;
         }
-    }
+    }
+
     public class CalendarManager
     {
         public List<Event> Events { get; private set; }
@@ -27,6 +28,7 @@ namespace КалендарьКласс
             Events = new List<Event>();
             LoadEvents();
         }
+
         public void AddEvent(Event e)
         {
             if (e == null)
@@ -47,8 +49,7 @@ namespace КалендарьКласс
         }
         public void SaveEvents()
         {
-            File.WriteAllLines("events.txt", Events.Select(e =>
-            $"{e.Date.ToString("yyyy-MM-dd")}|{e.Description}"));
+            File.WriteAllLines("events.txt", Events.Select(e => $"{e.Date.ToString("yyyy-MM-dd")}|{e.Description}"));
         }
         public void LoadEvents()
         {
@@ -68,6 +69,11 @@ namespace КалендарьКласс
                     }
                 }
             }
+            else
+            {
+                File.Create("events.txt");
+            }
         }
-    }
+    }
+
 }
